@@ -1,2 +1,5 @@
 # MacOS Files #
 *.DS_Store
+
+# Compiled/Target Files #
+blog-posts-code/blog-posts-java/target/*
