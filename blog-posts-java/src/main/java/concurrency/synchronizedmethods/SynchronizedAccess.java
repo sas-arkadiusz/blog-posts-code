@@ -1,12 +1,12 @@
 package concurrency.synchronizedmethods;
 
-public class StandardAccess {
+public class SynchronizedAccess {
 
     public static void main(String[] args) {
-        Counter counter = new Counter();
-        Thread threadA = new CounterThreadA(counter);
-        Thread threadB = new CounterThreadB(counter);
-        Thread threadC = new CounterThreadC(counter);
+        SynchronizedCounter counter = new SynchronizedCounter();
+        Thread threadA = new SynchronizedCounterThreadA(counter);
+        Thread threadB = new SynchronizedCounterThreadB(counter);
+        Thread threadC = new SynchronizedCounterThreadC(counter);
 
         threadA.start();
         threadB.start();
@@ -14,10 +14,10 @@ public class StandardAccess {
     }
 }
 
-class CounterThreadA extends Thread {
-    private Counter counter = null;
+class SynchronizedCounterThreadA extends Thread {
+    private SynchronizedCounter counter = null;
 
-    public CounterThreadA(Counter counter) {
+    public SynchronizedCounterThreadA(SynchronizedCounter counter) {
         this.counter = counter;
     }
 
@@ -30,10 +30,10 @@ class CounterThreadA extends Thread {
     }
 }
 
-class CounterThreadB extends Thread {
-    private Counter counter = null;
+class SynchronizedCounterThreadB extends Thread {
+    private SynchronizedCounter counter = null;
 
-    public CounterThreadB(Counter counter) {
+    public SynchronizedCounterThreadB(SynchronizedCounter counter) {
         this.counter = counter;
     }
 
@@ -46,10 +46,10 @@ class CounterThreadB extends Thread {
     }
 }
 
-class CounterThreadC extends Thread {
-    private Counter counter = null;
+class SynchronizedCounterThreadC extends Thread {
+    private SynchronizedCounter counter = null;
 
-    public CounterThreadC(Counter counter) {
+    public SynchronizedCounterThreadC(SynchronizedCounter counter) {
         this.counter = counter;
     }
 
@@ -62,14 +62,14 @@ class CounterThreadC extends Thread {
     }
 }
 
-class Counter {
+class SynchronizedCounter {
     private int value = 0;
 
-    public void incrementValue() {
+    public synchronized void incrementValue() {
         this.value++;
     }
 
-    public void decrementValue() {
+    public synchronized void decrementValue() {
         this.value--;
     }
 
