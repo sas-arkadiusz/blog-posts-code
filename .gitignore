@@ -2,5 +2,5 @@
 *.DS_Store
 
 # Compiled/Target Files #
-blog-posts-code/blog-posts-java/target/*
-blog-posts-code/blog-posts-java/.idea/*
+blog-posts-java/target/*
+blog-posts-java/.idea/*
