@@ -1,6 +1,8 @@
 package concurrency.synchronizedmethods;
 
-public class SynchronizedStatements {
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AtomicAccess {
 
     public static void main(String[] args) {
         Counter counter = new Counter();
@@ -24,7 +26,7 @@ public class SynchronizedStatements {
         public void run() {
             for (int i = 0; i < 10; i++) {
                 counter.waitWithExecution(200);
-                counter.modifyValue(i * i);
+                counter.modifyValue();
             }
         }
     }
@@ -40,7 +42,7 @@ public class SynchronizedStatements {
         public void run() {
             for (int i = 0; i < 10; i++) {
                 counter.waitWithExecution(200);
-                counter.modifyValue(i * (-1));
+                counter.modifyValue();
             }
         }
     }
@@ -54,7 +56,7 @@ public class SynchronizedStatements {
 
         @Override
         public void run() {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 10; i++) {
                 counter.waitWithExecution(500);
                 System.out.println(counter.getValue());
             }
@@ -62,16 +64,14 @@ public class SynchronizedStatements {
     }
 
     static class Counter {
-        private int value = 0;
+        final AtomicInteger value = new AtomicInteger();
 
-        public void modifyValue(int value) {
-            synchronized (this) {
-                this.value += value;
-            }
+        public void modifyValue() {
+            this.value.getAndIncrement();
         }
 
         public int getValue() {
-            return value;
+            return value.get();
         }
 
         public void waitWithExecution(long millis) {
